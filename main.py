@@ -1,6 +1,7 @@
 # импортируем библиотеки
 from flask import Flask, request
 import logging
+import os
 
 # библиотека, которая нам понадобится для работы с JSON
 import json
@@ -79,7 +80,9 @@ def handle_dialog(req, res):
         'ладно',
         'куплю',
         'покупаю',
-        'хорошо'
+        'хорошо',
+        'Я покупаю',
+        'Я куплю'
     ]:
         # Пользователь согласился, прощаемся.
         res['response']['text'] = 'Слона можно найти на Яндекс.Маркете!'
@@ -119,4 +122,5 @@ def get_suggests(user_id):
     return suggests
 
 if __name__ == '__main__':
-    app.run(port=8080, host="localhost")
+    port = int(os.environ.get("PORT", 8080))
+    app.run(port=port, host="0.0.0.0")
